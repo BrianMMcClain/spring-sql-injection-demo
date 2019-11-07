@@ -33,9 +33,9 @@ public class DemoController {
         }
     }
 
-    @RequestMapping(value = "/inject/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/unsafe/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String inject(@PathVariable("id") String id) {
+    public String unsafe(@PathVariable("id") String id) {
         try {
             // Connect to MySQL database and execute query
             connection = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "mypass");

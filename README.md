@@ -7,14 +7,14 @@ The demo has two endpoints, one that constructs SQL queries manually and another
 
 `./mvnw spring-boot:run`
 
-/inject
+/unsafe
 ---
 
-The `/inject` endpoint takes the user's input to manually construct a SQL query and get the database entries. The idea is that a user would provide a product id (perhaps via a web frontend) and the app would return information about that product. It would do so by running the following SQL query:
+The `/unsafe` endpoint takes the user's input to manually construct a SQL query and get the database entries. The idea is that a user would provide a product id (perhaps via a web frontend) and the app would return information about that product. It would do so by running the following SQL query:
 
 `statement.executeQuery("select * from product where id = " + id);`
 
-If a request if sent to [http://localhost:8080/inject/1](http://localhost:8080/inject/1), you'll see one product returned:
+If a request if sent to [http://localhost:8080/unsafe/1](http://localhost:8080/unsafe/1), you'll see one product returned:
 
 `Football: $19.99`
 
@@ -24,7 +24,7 @@ However, if we construct our request in such a way to manipulate the request, we
 
 In this case, `OR 1=1` is how we can make this query dump the entire database of products, because it will always evaluate to `true`. In turn, we can change the HTTP request to our app to trick it into running this new query: 
 
-[http://localhost:8080/inject/1%20OR%201=1](http://localhost:8080/inject/1%20OR%201=1)
+[http://localhost:8080/unsafe/1%20OR%201=1](http://localhost:8080/unsafe/1%20OR%201=1)
 
 And we'll see our entire inventory is returned in our application:
 
